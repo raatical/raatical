@@ -94,7 +94,7 @@ getgenv().Settings = {
 	    ["NoDelay"] = false,
 	    ["AutoReload"] = false,
 	    ["AutoAir"] = {
-	        ["Enabled"] = false,
+	        ["Enabled"] = true,
 	        ["Interval"] = 0.5,
 	    },
 	    ["CMDS"] = { 
