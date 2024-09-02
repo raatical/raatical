@@ -1,0 +1,356 @@
+
+
+
+local library = loadstring(game:HttpGet('https://raw.githubusercontent.com/obeseinsect/roblox/main/Ui%20Libraries/Elerium.lua'))()
+
+-- Lock
+local V3 = Vector3.new
+local V2 = Vector2.new
+local inf = math.huge
+getgenv().Settings = {
+    ["FearLas"] = {
+        ["Enabled"] = false,
+        ["DOT"] = true,
+        ["AIRSHOT"] = false,
+        ["Prediction"] = {
+            ["Horizontal"] = 0.185,
+            ["Vertical"] = 0.1,
+        },
+        ["CamPrediction"] = {
+            ["Prediction"] = {
+                ["Horizontal"] = 0.185,
+                ["Vertical"] = 0.1,
+            },
+        },
+        ["NOTIF"] = true,
+        ["AUTOPRED"] = false,
+        ["AdvancedAutoPred"] = false,
+        ["FOV"] = inf,
+        ["RESOLVER"] = false,
+        ["LOCKTYPE"] = "Namecall",
+        ["TargetStats"] = false,
+        ["Resolver"] = {
+              ["Enabled"] = false,
+              ["Type"] = "None",
+        },
+       ["Camera"] = {
+        ["Enabled"] = false,
+        ["HoodCustomsBypass"] = false,
+     },
+        ["OnHit"] = {
+             ["Enabled"] = true,
+             ["Hitchams"] = {
+                  ["Enabled"] = false,
+                  ["Color"] = Color3.fromRGB(0,0,139),
+                  ["Transparency"] = 0,
+                  ["Material"] = "ForceField",
+             },
+            ["Hitsound"] = {
+                  ["Enabled"] = false,
+                  ["Sound"] = "hitsounds/sparkle.wav",
+                  ["Volume"] = 2,
+            },
+        }
+    },
+	["Silent"] = {
+		["Enabled"] = false,
+		["AimPart"] = "HumanoidRootPart",
+		["WallCheck"] = false,
+		["Visualize"] = false,
+		["Prediction"] = {
+		   ["Horizontal"] = 0.15,
+		   ["Vertical"] = 0.05,
+		},
+	    ["AutoPrediction"] = {
+	        ["Enabled"] = false,
+	        ["Type"] = "Normal", --//Normal, Custom
+           ["ping20_30"] = 0.12588,
+           ["ping30_40"] = 0.11911,
+           ["ping40_50"] = 0.12471,
+           ["ping50_60"] = 0.13766,
+           ["ping60_70"] = 0.13731,
+           ["ping70_80"] = 0.13951,
+           ["ping80_90"] = 0.14181,
+           ["ping90_100"] = 0.148,
+           ["ping100_110"] = 0.156,
+           ["ping110_120"] = 0.1567,
+           ["ping120_130"] = 0.1601,
+           ["ping130_140"] = 0.1637,
+           ["ping140_150"] = 0.173,
+           ["ping150_160"] = 0.1714,
+           ["ping160_170"] = 0.1863,
+           ["ping170_180"] = 0.1872,
+           ["ping180_190"] = 0.1848,
+           ["ping190_200"] = 0.1865,
+	    },
+		["Mode"] = "Namecall", --index,namecal
+	},
+	["FOV"] = {
+		["Enabled"] = false,
+		["Size"] = 23,
+		["Filled"] = false,
+		["Thickness"] = 0.66,
+		["Transparency"] = 0.9,
+		["Color"] = Color3.fromRGB(255,255,255),
+	},
+	["Misc"] = {
+	    ["NoDelay"] = false,
+	    ["AutoReload"] = false,
+	    ["AutoAir"] = {
+	        ["Enabled"] = false,
+	        ["Interval"] = 0.5,
+	    },
+	    ["CMDS"] = { 
+	        ["Enabled"] = false,
+	        ["FOVPrefix"] = "B",
+	        ["Prediction"] = "A",
+	   },
+	},
+	["Checks"] = { --entirely not
+	    ["UnlovkOnKO"] = false,
+	    ["TrashTalkOnKO"] = false,
+	},
+	["Resolution"] = {
+	    ["Value"] = 1,
+	   },
+	["Resolvers"] = {  --entirely not
+	    ["Enabled"] = false,
+	    ["AutoDetect"] = false,
+	    ["Type"] = "Recalculator",
+	},
+    ["Visuals"] = {
+        ["Ambient"] = {
+            ["Enabled"] = false,
+            ["Color"] = Color3.fromRGB(4, 0, 255),
+        },
+        ["OutDoor Ambient"] = {
+            ["Enabled"] = false,
+            ["Color"] = Color3.fromRGB(4, 0, 255)
+        },
+        ["Fog Modifications"] = {
+            ["Enabled"] = false,
+            ["Color"] = Color3.fromRGB(4, 0, 255),
+            ["Start"] = 15,
+            ["End"] = 100 
+        },
+        ["ColorCorrection"] = {
+            ["Enabled"] = false,
+            ["Brightness"] = 0,
+            ["Saturation"] = 5,
+            ["Contrast"] = 2,
+        },
+    },
+}
+getgenv().DistancesMid = 50
+getgenv().DistancesClose = 10
+getgenv().AimSpeed = 1
+getgenv().CAMPREDICTION = 0.185
+getgenv().CAMJUMPPREDICTION = 0.1
+getgenv().HorizontalSmoothness = 1
+getgenv().VerticallSmoothness = 0.5
+getgenv().ShakeX = 0
+getgenv().ShakeY = 0
+getgenv().ShakeZ = 0
+getgenv().PREDICTION = 0.185
+getgenv().JUMPPREDICTION = 0.1
+getgenv().SelectedPart = "HumanoidRootPart" --// LowerTorso, UpperTorso, Head
+getgenv().Prediction = "Normal"
+getgenv().AutoPredType = "Normal"
+getgenv().Resolver = false
+local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Module.Lua"))()
+
+local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
+
+
+function SendNotification(text)
+    Notification:Notify(
+	   {Title = "ali.cc", Description = "kys nigger - "..text},
+        {OutlineColor = Color3.fromRGB(0,0,139),Time = 3, Type = "image"},
+        {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(0,0,139)}
+    )
+end
+function calculateVelocity(initialPos, finalPos, timeInterval)
+    local displacement = finalPos - initialPos
+    local velocity = displacement / timeInterval
+    return velocity
+    end
+    game:GetService('RunService').RenderStepped:connect(function(deltaTime)
+    if getgenv().Resolver == true and enabled then 
+        local character = Plr.Character[getgenv().SelectedPart]
+        local lastPosition = character.Position
+            task.wait()
+        local currentPosition = character.Position
+        local velocity = calculateVelocity(lastPosition, currentPosition, deltaTime)
+        character.AssemblyLinearVelocity = velocity
+        character.Velocity = velocity
+            lastPosition = currentPosition
+        end
+    end)
+
+--// Change Prediction,  AutoPrediction Must Be Off
+    local lplr = game.Players.LocalPlayer
+    local AnchorCount = 0
+    local MaxAnchor = 50
+    local CC = game:GetService"Workspace".CurrentCamera
+    local Plr;
+    local enabled = false
+    local mouse = game.Players.LocalPlayer:GetMouse()
+    local placemarker = Instance.new("Part", game.Workspace)
+    function makemarker(Parent, Adornee, Color, Size, Size2)
+        local e = Instance.new("BillboardGui", Parent)
+        e.Name = "PP"
+        e.Adornee = Adornee
+        e.Size = UDim2.new(Size, Size2, Size, Size2)
+        e.AlwaysOnTop = getgenv().Settings.FearLas.DOT
+        local a = Instance.new("Frame", e)
+        if getgenv().Settings.FearLas.DOT == true then
+        a.Size = UDim2.new(1, 1, 1, 1)
+        else
+        a.Size = UDim2.new(0, 0, 0, 0)
+        end
+        if getgenv().Settings.FearLas.DOT == true then
+        a.Transparency = 0
+        a.BackgroundTransparency = 0
+        else
+        a.Transparency = 1
+        a.BackgroundTransparency = 1
+        end
+        a.BackgroundColor3 = Color
+        local g = Instance.new("UICorner", a)
+        if getgenv().Settings.FearLas.DOT == false then
+        g.CornerRadius = UDim.new(1, 1)
+        else
+        g.Corner
+                g.CornerRadius = UDim.new(1, 1)
+        end
+        return(e)
+    end
+    local data = game.Players:GetPlayers()
+    function noob(player)
+        local character
+        repeat wait() until player.Character
+        local handler = makemarker(guimain, player.Character:WaitForChild(SelectedPart), Color3.fromRGB(107, 184, 255), 0.3, 3)
+        handler.Name = player.Name
+        player.CharacterAdded:connect(function(Char) handler.Adornee = Char:WaitForChild(SelectedPart) end)
+ 
+        spawn(function()
+            while wait() do
+                if player.Character then
+                end
+            end
+        end)
+    end
+ 
+    for i = 1, #data do
+        if data[i] ~= game.Players.LocalPlayer then
+            noob(data[i])
+        end
+    end
+ 
+    game.Players.PlayerAdded:connect(function(Player)
+        noob(Player)
+    end)
+ 
+    spawn(function()
+        placemarker.Anchored = true
+        placemarker.CanCollide = false
+        if getgenv().Settings.FearLas.DOT == true then
+        placemarker.Size = V3(0, 0, 0)
+        else
+        placemarker.Size = V3(0, 0, 0)
+        end
+        placemarker.Transparency = 0.75
+        if getgenv().Settings.FearLas.DOT then
+        makemarker(placemarker, placemarker, Color3.fromRGB(0,0,139), 1, 0)
+        end
+    end)
+
+    -- Anti-Cheat Bypass and Notification Integration
+    local BypassFolder = Tib:AddFolder("Anti Cheat Bypass")
+    BypassFolder:AddLabel("Anti Cheats")
+
+    local Bypass1 = BypassFolder:AddSwitch("Hood Custom Camlock Bypass", function(bool)
+        getgenv().Settings.FearLas.Camera.HoodCustomsBypass = bool
+        if bool then
+            SendNotification("Adonis has been bypassed")
+        end
+    end)
+    Bypass1:Set(false)
+
+    local Bypass2 = BypassFolder:AddSwitch("DaHood Bypass", function(bool)
+        getgenv().DaHoodBypass = bool
+        if bool then
+            SendNotification("Adonis has been bypassed")
+        end
+    end)
+    Bypass2:Set(false)
+
+    local Bypass3 = BypassFolder:AddSwitch("Untitled Hood Bypass", function(bool)
+        getgenv().UntitledHoodBypass = bool
+        if bool then
+            SendNotification("Adonis has been bypassed")
+        end
+    end)
+    Bypass3:Set(false)
+
+    if getgenv().UntitledHoodBypass == true then
+        local _1;
+        _1 = hookmetamethod(game, "__namecall", function(self, ...)
+            if not checkcaller() and getnamecallmethod() == "FireServer" then
+                if tostring(self.Name) == ".gg/untitledhood" then
+                    local args = {...}
+                    if tostring(args[1]) == "ForceDetect" or tostring(args[1]) == "TeleportDetect" or tostring(args[1]) == "GUI_CHECK" then
+                        SendNotification("Adonis has been bypassed")
+                        return print("anticheat detected something sussy")
+                    end
+                end
+            end
+            return _1(self, ...);
+        end)
+    end
+
+    if getgenv().DaHoodBypass == true then
+        assert(getrawmetatable)
+        grm = getrawmetatable(game)
+        setreadonly(grm, false)
+        old = grm.__namecall
+        grm.__namecall = newcclosure(function(self, ...)
+            local args = {...}
+            if tostring(args[1]) == "TeleportDetect" then
+                SendNotification("Adonis has been bypassed")
+                return
+            elseif tostring(args[1]) == "CHECKER_1" then
+                SendNotification("Adonis has been bypassed")
+                return
+            elseif tostring(args[1]) == "CHECKER" then
+                SendNotification("Adonis has been bypassed")
+                return
+            elseif tostring(args[1]) == "GUI_CHECK" then
+                SendNotification("Adonis has been bypassed")
+                return
+            elseif tostring(args[1]) == "OneMoreTime" then
+                SendNotification("Adonis has been bypassed")
+                return
+            elseif tostring(args[1]) == "checkingSPEED" then
+                SendNotification("Adonis has been bypassed")
+                return
+            elseif tostring(args[1]) == "BANREMOTE" then
+                SendNotification("Adonis has been bypassed")
+                return
+            elseif tostring(args[1]) == "PERMAIDBAN" then
+                SendNotification("Adonis has been bypassed")
+                return
+            elseif tostring(args[1]) == "KICKREMOTE" then
+                SendNotification("Adonis has been bypassed")
+                return
+            elseif tostring(args[1]) == "BR_KICKPC" then
+                SendNotification("Adonis has been bypassed")
+                return
+            elseif tostring(args[1]) == "BR_KICKMOBILE" then
+                SendNotification("Adonis has been bypassed")
+                return
+            end
+            return old(self, ...)
+        end)
+    end
+end)
