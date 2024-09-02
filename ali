@@ -25,7 +25,7 @@ getgenv().Settings = {
         ["FOV"] = inf,
         ["RESOLVER"] = false,
         ["LOCKTYPE"] = "Namecall",
-        ["TargetStats"] = true,
+        ["TargetStats"] = false,
         ["Resolver"] = {
               ["Enabled"] = false,
               ["Type"] = "None",
@@ -105,7 +105,7 @@ getgenv().Settings = {
 	},
 	["Checks"] = { --entirely not
 	    ["UnlovkOnKO"] = false,
-	    ["TrashTalkOnKO"] = false,
+	    ["TrashTalkOnKO"] = true,
 	},
 	["Resolution"] = {
 	    ["Value"] = 1,
